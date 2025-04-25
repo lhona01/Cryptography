@@ -1,2 +1,2 @@
 # Cryptography
-school class projects
+class projects

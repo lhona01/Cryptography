@@ -1,22 +1,24 @@
-﻿using System;
-using System.Numerics;
-using System.Collections.Generic;
+﻿using System.Numerics;
 
 class RSA
 {
     public static void Main(string[] args)
     {
-        // Simulate input for demonstration
-        BigInteger cipherText = BigInteger.Parse("66536047120374145538916787981868004206438539248910734713495276883724693574434582104900978079701174539167102706725422582788481727619546235440508214694579");
-        BigInteger plainText = BigInteger.Parse("1756026041");
+        BigInteger cipherText = BigInteger.Parse(args[4]);
+        BigInteger plainText = BigInteger.Parse(args[5]);
 
-        Dictionary<string, BigInteger[]> keys = GenerateKeys(254, 1223, 251, 1339);
+        Dictionary<string, BigInteger[]> keys = GenerateKeys(
+        Convert.ToInt32(args[0]), Convert.ToInt32(args[1]), Convert.ToInt32(args[2]), Convert.ToInt32(args[3]));
+
+        // Simulate input for demonstration
+        //BigInteger cipherText = BigInteger.Parse("66536047120374145538916787981868004206438539248910734713495276883724693574434582104900978079701174539167102706725422582788481727619546235440508214694579");
+        //BigInteger plainText = BigInteger.Parse("1756026041");
+        // Dictionary<string, BigInteger[]> keys = GenerateKeys(254, 1223, 251, 1339);
 
         BigInteger encryptedText = RSAEncryption(plainText, keys["publicKey"]);
         BigInteger decryptedText = RSADecryption(cipherText, keys["privateKey"]);
 
-        Console.WriteLine("Encrypted Text: " + encryptedText);
-        Console.WriteLine("Decrypted Text: " + decryptedText);
+        Console.WriteLine(decryptedText + "," + encryptedText);
     }
 
     // Encryption: c = m^e mod n
